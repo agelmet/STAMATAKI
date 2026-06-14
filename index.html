@@ -70,7 +70,7 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
   display:flex;flex-direction:column;align-items:center;gap:1.5rem;
 }
 .loader-logo{
-  width:clamp(140px, 20vw, 200px);
+  width:clamp(160px, 25vw, 240px);
   opacity:0;
   transform:translateY(20px) scale(0.95);
   animation:logoEnter 1.4s var(--ease) forwards;
@@ -86,14 +86,13 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
   padding:1.1rem var(--pad);transition:background .5s var(--ease),box-shadow .5s,padding .5s;
 }
 .nav.scrolled{background:rgba(246,237,228,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);padding-top:.8rem;padding-bottom:.8rem}
-.nav-logo{display:flex;align-items:center;gap:.7rem;font-family:var(--ff-display);font-size:1.18rem;letter-spacing:-.01em;transition:transform .3s ease;}
-.nav-logo:hover{transform:scale(1.02)}
-.nav-logo .mk{
-  width:34px;height:34px;border-radius:50%;background:var(--clay);
-  display:grid;place-items:center;color:var(--cloud);flex:none;
+.nav-logo{display:flex;align-items:center;transition:transform .3s ease;}
+.nav-brand-img{
+  height:46px; width:auto; object-fit:contain;
+  transition:transform .4s var(--ease);
 }
-.nav-logo .mk svg{width:19px;height:19px}
-.nav-logo small{display:block;font-family:var(--ff-body);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.nav-logo:hover .nav-brand-img{transform:scale(1.04)}
+
 .nav-links{display:flex;align-items:center;gap:2.1rem;list-style:none}
 .nav-links a{font-size:.85rem;font-weight:500;position:relative;padding:.2rem 0;color:var(--ink-soft);transition:color .3s}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1.5px;background:var(--clay);transition:width .35s var(--ease)}
@@ -243,36 +242,63 @@ section{padding:var(--section-y) var(--pad)}
 .cred-row b{font-family:var(--ff-display);font-size:1.7rem;display:block;color:var(--clay-deep)}
 .cred-row small{font-size:.78rem;color:var(--ink-soft);font-weight:500}
 
-/* MODERN SERVICES GRID */
-.svc-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:1.8rem;margin-top:3.5rem;
+/* SERVICES (UNIQUE BENTO GRID) */
+.svc-bento{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  gap:1.6rem;margin-top:3.5rem;
 }
-.svc-card{
-  background:var(--cloud);border:1px solid var(--line);border-radius:24px;
-  padding:2.4rem 2rem;display:flex;flex-direction:column;position:relative;
-  transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s;
-  box-shadow:0 4px 20px -10px rgba(43,39,36,.04);
+.bento-card{
+  background:var(--cloud);border:1px solid var(--line);border-radius:32px;
+  padding:2.8rem 2.4rem;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .5s var(--ease),box-shadow .5s,border-color .5s;
+  box-shadow:0 4px 24px -12px rgba(43,39,36,.06);
+  z-index:1;
 }
-.svc-card:hover{
+.bento-card:hover{
   transform:translateY(-8px);
   box-shadow:0 24px 48px -15px rgba(43,39,36,.12);
   border-color:rgba(201,139,110,.4);
 }
-.svc-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
-.svc-card .num{font-family:var(--ff-body);font-size:.95rem;font-weight:600;color:var(--clay);letter-spacing:.1em}
-.svc-card .ic{
-  width:46px;height:46px;border-radius:50%;background:var(--shell-2);
-  display:grid;place-items:center;color:var(--clay-deep);
-  transition:transform .5s var(--ease),background .4s;
+.bento-card.wide{grid-column:span 3;min-height:360px;}
+.bento-card.square{grid-column:span 2;min-height:340px;}
+
+.bento-bg-num{
+  position:absolute;top:-15px;right:-10px;
+  font-family:var(--ff-display);font-size:12rem;line-height:1;
+  color:var(--shell-2);opacity:.4;z-index:-1;
+  transition:transform .6s var(--ease),color .6s;
+  pointer-events:none;
 }
-.svc-card:hover .ic{background:var(--clay);color:var(--cloud);transform:rotate(12deg) scale(1.08)}
-.svc-card .ic svg{width:22px;height:22px}
-.svc-card h3{font-size:1.35rem;font-weight:500;margin-bottom:1rem;color:var(--ink);line-height:1.2}
-.svc-card p{color:var(--ink-soft);font-size:.96rem;line-height:1.6;flex-grow:1;margin-bottom:1.8rem}
-.svc-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.svc-tags span{font-size:.72rem;font-weight:500;background:var(--shell);border:1px solid var(--line);color:var(--ink-soft);padding:.4rem .85rem;border-radius:30px;transition:all .3s}
-.svc-card:hover .svc-tags span{background:var(--shell-2);color:var(--ink)}
+.bento-card:hover .bento-bg-num{
+  transform:translate(-10px,10px) scale(1.05);
+  color:rgba(201,139,110,.15);
+}
+
+.bento-card .ic{
+  width:58px;height:58px;border-radius:18px;background:var(--shell-2);
+  color:var(--clay-deep);display:grid;place-items:center;
+  margin-bottom:auto; /* Ensures symmetrical bottom-alignment for content */
+  transition:transform .5s var(--ease),background .4s,color .4s;
+}
+.bento-card:hover .ic{
+  transform:rotate(-10deg) scale(1.1);
+  background:var(--clay);color:var(--cloud);
+}
+.bento-card .ic svg{width:26px;height:26px}
+
+.bento-card h3{font-size:1.45rem;font-weight:500;color:var(--ink);margin-top:2rem;margin-bottom:.8rem;line-height:1.2}
+.bento-card p{color:var(--ink-soft);font-size:.96rem;line-height:1.6;margin-bottom:1.8rem;}
+
+.svc-tags{display:flex;flex-wrap:wrap;gap:.6rem}
+.svc-tags span{
+  font-size:.74rem;font-weight:600;color:var(--ink-soft);
+  border:1px solid var(--line);padding:.4rem .9rem;border-radius:30px;
+  transition:all .3s;background:transparent;
+}
+.bento-card:hover .svc-tags span{
+  background:var(--shell-2);border-color:var(--clay);color:var(--ink);
+}
 
 /* PROCESS */
 .process{background:var(--ink);color:var(--cloud)}
@@ -386,7 +412,7 @@ footer{background:var(--shell);padding:3rem var(--pad);text-align:center}
 footer small{display:block;color:var(--ink-soft);font-size:.8rem}
 footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
 
-/* REVEAL (Upgraded smooth entrance) */
+/* REVEAL */
 .reveal{
   opacity:0;
   transform:translateY(36px);
@@ -402,6 +428,14 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   .hero-portrait .frame{width:min(78vw,340px)}
   .about-grid{grid-template-columns:1fr}
   .about-img{order:-1;max-width:480px}
+  
+  /* Bento adjustments for tablets */
+  .svc-bento{grid-template-columns:repeat(4,1fr);}
+  .bento-card.wide{grid-column:span 2;}
+  .bento-card.square:nth-child(3){grid-column:span 2;}
+  .bento-card.square:nth-child(4){grid-column:span 2;}
+  .bento-card.square:nth-child(5){grid-column:1 / 5;}
+  
   .steps{grid-template-columns:repeat(2,1fr);gap:2.2rem}
   .phil-grid{grid-template-columns:1fr 1fr}
   .rev-card{flex:0 0 calc(50% - .7rem)}
@@ -410,6 +444,12 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
 @media(max-width:680px){
   .nav-links,.nav-cta{display:none}
   .burger{display:flex}
+  
+  /* Bento to column for mobile */
+  .svc-bento{display:flex;flex-direction:column;}
+  .bento-card{padding:2.2rem 1.8rem;min-height:auto;}
+  .bento-bg-num{font-size:8rem;top:0;right:0;}
+  
   .phil-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
   .rev-card{flex:0 0 100%}
@@ -417,7 +457,6 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   .reframe{display:inline-grid}
   .reframe .heavy,.reframe .light{grid-area:1/1;position:static;white-space:normal}
   .reframe::after{display:none}
-  .svc-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01ms!important}
@@ -427,18 +466,17 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
 </head>
 <body>
 
+<!-- LOADER -->
 <div id="loader" aria-hidden="true">
   <div class="load-stage">
     <img src="https://raw.githubusercontent.com/agelmet/STAMATAKI/refs/heads/main/logogoo.png" alt="Παρασκευή Σταματάκη Logo" class="loader-logo">
   </div>
 </div>
 
+<!-- NAV -->
 <nav class="nav" id="nav">
   <a href="#hero" class="nav-logo" aria-label="Αρχική">
-    <span class="mk" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21c4.97-4.5 8-7.5 8-11A8 8 0 1 0 4 10c0 3.5 3.03 6.5 8 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
-    </span>
-    <span>Π. Σταματάκη<small>Ψυχολόγος · CBT</small></span>
+    <img src="https://raw.githubusercontent.com/agelmet/STAMATAKI/refs/heads/main/logogoo.png" alt="Παρασκευή Σταματάκη Logo" class="nav-brand-img">
   </a>
   <ul class="nav-links">
     <li><a href="#about">Η Διαδρομή μου</a></li>
@@ -462,6 +500,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   <a href="#contact">Προγραμματίστε συνεδρία</a>
 </div>
 
+<!-- HERO -->
 <header class="hero" id="hero">
   <div class="hero-grid">
     <div class="hero-text">
@@ -495,6 +534,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   <a href="#about" class="scroll-cue" aria-label="Κυλήστε προς τα κάτω"><span>Ανακαλύψτε</span><span class="dot"></span></a>
 </header>
 
+<!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
     <span>Διαχείριση Άγχους</span><span>Κρίσεις Πανικού</span><span>Ειδικές Φοβίες</span><span>Διαπροσωπικές Σχέσεις</span><span>Συμβουλευτική Γονέων</span><span>Προσωπική Εξέλιξη</span><span>Διαχείριση Θυμού</span>
@@ -502,6 +542,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   </div>
 </div>
 
+<!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-grid wrap">
     <div class="about-img reveal">
@@ -523,67 +564,75 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   </div>
 </section>
 
+<!-- SERVICES (BENTO GRID) -->
 <section id="services">
   <div class="section-head reveal">
     <span class="eyebrow">Υπηρεσίες</span>
     <h2>Υποστήριξη εναρμονισμένη με τις <em>δικές σας ανάγκες</em>.</h2>
   </div>
-  <div class="svc-grid wrap">
+  
+  <div class="svc-bento wrap">
     
-    <div class="svc-card reveal d1">
-      <div class="svc-card-head">
-        <span class="num">01</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <!-- Wide Card 1 -->
+    <div class="bento-card wide reveal d1">
+      <div class="bento-bg-num">01</div>
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
       <h3>Ατομική Ψυχοθεραπεία</h3>
       <p>Μέσα από τη Γνωσιακή-Συμπεριφορική προσέγγιση, δουλεύουμε μαζί για να αναγνωρίσουμε και να αναδιαμορφώσουμε δυσλειτουργικά μοτίβα σκέψης, χτίζοντας πρακτικές δεξιότητες για μια πιο λειτουργική καθημερινότητα.</p>
-      <div class="svc-tags"><span>Ενήλικες · 50′</span><span>Έφηβοι · 50′</span><span>Σύντομη συνεδρία · 20′</span></div>
+      <div class="svc-tags"><span>Ενήλικες · 50′</span><span>Έφηβοι · 50′</span><span>Σύντομη · 20′</span></div>
     </div>
 
-    <div class="svc-card reveal d2">
-      <div class="svc-card-head">
-        <span class="num">02</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <!-- Wide Card 2 -->
+    <div class="bento-card wide reveal d2">
+      <div class="bento-bg-num">02</div>
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
       <h3>Άγχος & Κρίσεις Πανικού</h3>
       <p>Εξειδικευμένη παρέμβαση για την αντιμετώπιση του έντονου άγχους, των κρίσεων πανικού και των ειδικών φοβιών. Στόχος μας είναι η ανάκτηση του ελέγχου και η επαναφορά της εσωτερικής σας ηρεμίας.</p>
       <div class="svc-tags"><span>Διαχείριση Άγχους</span><span>Κρίσεις Πανικού</span><span>Φοβίες</span></div>
     </div>
 
-    <div class="svc-card reveal d3">
-      <div class="svc-card-head">
-        <span class="num">03</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+    <!-- Square Card 1 -->
+    <div class="bento-card square reveal d1">
+      <div class="bento-bg-num">03</div>
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
       </div>
       <h3>Συναισθηματική Ενδυνάμωση</h3>
-      <p>Σταθερή υποστήριξη σε περιόδους θλίψης, παρατεταμένης στενοχώριας ή κατάθλιψης. Δημιουργούμε το κατάλληλο πλαίσιο για να εκφραστείτε με απόλυτη ασφάλεια και να ανακαλύψετε ξανά το νόημα της ζωής σας.</p>
-      <div class="svc-tags"><span>Κατάθλιψη</span><span>Θλίψη</span><span>Ψυχολογική Στήριξη</span></div>
+      <p>Σταθερή υποστήριξη σε περιόδους θλίψης, παρατεταμένης στενοχώριας ή κατάθλιψης. Βρίσκουμε ξανά το νόημα.</p>
+      <div class="svc-tags"><span>Κατάθλιψη</span><span>Θλίψη</span></div>
     </div>
 
-    <div class="svc-card reveal d1">
-      <div class="svc-card-head">
-        <span class="num">04</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <!-- Square Card 2 -->
+    <div class="bento-card square reveal d2">
+      <div class="bento-bg-num">04</div>
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
       <h3>Σχέσεις & Οικογένεια</h3>
-      <p>Συμβουλευτική ζεύγους, καθοδήγηση γονέων και υποστήριξη σε μεταβατικές περιόδους ζωής. Εστιάζουμε σταθερά στη βελτίωση της επικοινωνίας και τη θέσπιση υγιών, ξεκάθαρων ορίων.</p>
-      <div class="svc-tags"><span>Γονείς · 50′</span><span>Ζεύγος · 60′</span><span>Διαζύγιο · 60′</span></div>
+      <p>Συμβουλευτική ζεύγους, καθοδήγηση γονέων και ουσιαστική υποστήριξη σε μεταβατικές περιόδους ζωής.</p>
+      <div class="svc-tags"><span>Γονείς</span><span>Ζεύγος</span><span>Διαζύγιο</span></div>
     </div>
 
-    <div class="svc-card reveal d2">
-      <div class="svc-card-head">
-        <span class="num">05</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg></div>
+    <!-- Square Card 3 -->
+    <div class="bento-card square reveal d3">
+      <div class="bento-bg-num">05</div>
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
       </div>
       <h3>Προσωπική Εξέλιξη</h3>
-      <p>Ιδανικό για εσάς που επιθυμείτε να εμβαθύνετε στην αυτογνωσία σας και να εξελιχθείτε ουσιαστικά. Δουλεύουμε στην ενίσχυση της αυτοεκτίμησης, με γνώμονα μια αυθεντική και ισορροπημένη ζωή.</p>
-      <div class="svc-tags"><span>Αυτογνωσία</span><span>Αυτοεκτίμηση</span><span>Εξέλιξη</span></div>
+      <p>Εμβάθυνση στην αυτογνωσία και ενίσχυση της αυτοεκτίμησης με γνώμονα μια αυθεντική, ισορροπημένη ζωή.</p>
+      <div class="svc-tags"><span>Αυτογνωσία</span><span>Εξέλιξη</span></div>
     </div>
 
   </div>
-  <p style="max-width:var(--maxw);margin:2.5rem auto 0;font-size:.85rem;color:var(--ink-soft);text-align:center;">Τα κόστη είναι ενδεικτικά και ενδέχεται να διαφοροποιηθούν ανάλογα με το εκάστοτε περιστατικό. Σημειώνεται πως δεν παρέχεται ηλεκτρονική συνταγογράφηση.</p>
+  <p style="max-width:var(--maxw);margin:3rem auto 0;font-size:.85rem;color:var(--ink-soft);text-align:center;">Τα κόστη είναι ενδεικτικά και ενδέχεται να διαφοροποιηθούν ανάλογα με το εκάστοτε περιστατικό. Σημειώνεται πως δεν παρέχεται ηλεκτρονική συνταγογράφηση.</p>
 </section>
 
+<!-- PROCESS -->
 <section class="process" id="process">
   <div class="section-head reveal">
     <span class="eyebrow">Τα Βήματα της Συνεργασίας Μας</span>
@@ -597,6 +646,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   </div>
 </section>
 
+<!-- PHILOSOPHY -->
 <section id="philosophy">
   <div class="section-head reveal">
     <span class="eyebrow">Η Φιλοσοφία μου</span>
@@ -636,6 +686,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   </div>
 </section>
 
+<!-- REVIEWS -->
 <section class="reviews" id="reviews">
   <div class="rev-top reveal">
     <div>
@@ -657,6 +708,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   <div class="rev-more"><a href="https://www.doctoranytime.gr/d/Psychologos/stamataki-eui#review-section" target="_blank" rel="noopener">Διαβάστε και τις 33 αξιολογήσεις →</a></div>
 </section>
 
+<!-- FAQ -->
 <section id="faq">
   <div class="section-head reveal">
     <span class="eyebrow">Συχνές Ερωτήσεις</span>
@@ -690,6 +742,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   </div>
 </section>
 
+<!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="wrap">
     <span class="eyebrow reveal">Επικοινωνία</span>
@@ -725,6 +778,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="foot-logo">Παρασκευή Σταματάκη</div>
   <small>Ψυχολόγος · Ψυχοθεραπεύτρια (CBT) — Αρ. αδείας 14559/05-08-2010 · Μέλος δικτύου DO+</small>
