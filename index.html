@@ -70,13 +70,33 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
   display:flex;flex-direction:column;align-items:center;gap:1.5rem;
 }
 .loader-logo{
-  width:clamp(160px, 25vw, 240px);
+  width:130px;
+  height:130px;
+  object-fit:cover;
+  border-radius:50%;
+  background:var(--cloud);
+  border:3px solid rgba(251, 246, 240, 0.8);
+  box-shadow:0 10px 30px -10px rgba(43,39,36,.25);
   opacity:0;
   transform:translateY(20px) scale(0.95);
   animation:logoEnter 1.4s var(--ease) forwards;
 }
 @keyframes logoEnter{
   to{opacity:1;transform:translateY(0) scale(1)}
+}
+.loader-text {
+  display:flex;flex-direction:column;gap:.3rem;
+  opacity:0;transform:translateY(15px);
+  animation:textEnter 1.2s var(--ease) .3s forwards;
+}
+.loader-name {
+  font-family:var(--ff-display);font-size:clamp(1.8rem, 4vw, 2.4rem);color:var(--ink);line-height:1.1;
+}
+.loader-title {
+  font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--clay-deep);font-weight:600;
+}
+@keyframes textEnter {
+  to { opacity:1; transform:translateY(0); }
 }
 
 /* ---------- NAV ---------- */
@@ -88,7 +108,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
 .nav.scrolled{background:rgba(246,237,228,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);padding-top:.8rem;padding-bottom:.8rem}
 .nav-logo{display:flex;align-items:center;transition:transform .3s ease;}
 
-/* UPDATED CIRCULAR LOGO */
 .nav-brand-img{
   height: 56px; 
   width: 56px; 
@@ -147,7 +166,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
   display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,5rem);align-items:center;
 }
 .hero-text { position: relative; z-index: 1; }
-/* New Ambient Glow Behind Text */
 .hero-ambient{
   position:absolute; width:400px; height:400px; 
   background:radial-gradient(circle, var(--clay) 0%, transparent 65%);
@@ -173,7 +191,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
 }
 .reframe.flip .heavy{opacity:0;filter:blur(6px);transform:translateY(-.12em)}
 .reframe.flip .light{opacity:1;filter:blur(0);transform:translateY(0)}
-/* Dynamic Animated Gradient Line */
 .reframe::after{
   content:"";position:absolute;left:0;bottom:-.06em;height:3px;width:100%;
   background:linear-gradient(90deg, var(--clay), var(--clay-deep), var(--sage-deep), var(--clay));
@@ -189,7 +206,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
 
 .hero-lead{margin-top:1.6rem;max-width:34ch;font-size:clamp(1rem,1.6vw,1.18rem);color:var(--ink-soft)}
 .hero-cta-row{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
-/* Enhanced Primary Button */
 .hero-cta-row .btn-primary{
   background:var(--clay-deep);color:var(--cloud);padding:.95rem 1.8rem;border-radius:44px;
   font-weight:600;font-size:.92rem;display:inline-flex;align-items:center;gap:.6rem;
@@ -209,7 +225,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
 }
 .btn-ghost:hover{background:var(--ink);color:var(--cloud);border-color:var(--ink);transform:translateY(-2px);box-shadow:0 8px 20px -6px rgba(43,39,36,.2);}
 
-/* Enhanced hero portrait */
 .hero-portrait{position:relative;justify-self:end; z-index: 2;}
 .hero-portrait .frame{
   position:relative;width:clamp(240px,32vw,380px);aspect-ratio:3/4;
@@ -228,7 +243,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
 }
 .hero-portrait:hover .frame img{ transform: scale(1.06); }
 
-/* Double Blobs for depth */
 .hero-portrait .blob{
   position:absolute;inset:auto;width:130%;height:130%;left:-18%;top:-12%;z-index:-1;
   background:radial-gradient(circle at 50% 45%,var(--sage) 0%,transparent 62%);opacity:.5;
@@ -241,7 +255,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:400;line-height:1.05;letter-s
   filter: blur(30px);
 }
 
-/* Floating Badge */
 .hero-portrait .badge{
   position:absolute;left:-1.6rem;bottom:1.6rem;background:var(--cloud);
   border-radius:18px;padding:.8rem 1.1rem;
@@ -313,6 +326,7 @@ section{padding:var(--section-y) var(--pad)}
 .cred-row div{flex:1;min-width:120px}
 .cred-row b{font-family:var(--ff-display);font-size:1.7rem;display:block;color:var(--clay-deep)}
 .cred-row small{font-size:.78rem;color:var(--ink-soft);font-weight:500}
+.mobile-only{display:none;}
 
 /* SERVICES (BENTO GRID) */
 .svc-bento{
@@ -396,10 +410,7 @@ section{padding:var(--section-y) var(--pad)}
 .phil-card::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--clay);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
 .phil-card:hover{transform:translateY(-8px);box-shadow:0 24px 44px -20px rgba(43,39,36,.12);border-color:rgba(201,139,110,.3)}
 .phil-card:hover::before{transform:scaleX(1)}
-.phil-card .pic{width:48px;height:48px;border-radius:14px;background:var(--shell-2);display:grid;place-items:center;color:var(--clay-deep);margin-bottom:1.4rem;transition:transform .4s var(--ease)}
-.phil-card:hover .pic{transform:scale(1.1) rotate(5deg);background:var(--clay);color:var(--cloud)}
-.phil-card .pic svg{width:24px;height:24px}
-.phil-card h3{font-size:1.25rem;font-weight:400;margin-bottom:.6rem;color:var(--ink)}
+.phil-card h3{font-size:1.25rem;font-weight:500;margin-bottom:.6rem;color:var(--ink)}
 .phil-card p{font-size:.94rem;color:var(--ink-soft)}
 
 /* REVIEWS */
@@ -473,13 +484,38 @@ section{padding:var(--section-y) var(--pad)}
 .contact-card .online .pulse{width:10px;height:10px;border-radius:50%;background:var(--sage-deep);position:relative}
 .contact-card .online .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--sage-deep);animation:pulse 2s infinite}
 @keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.5);opacity:0}}
-.contact-card .btn-primary{width:100%;justify-content:center;background:var(--ink);padding:1.1rem}
-.contact-card .btn-primary:hover{background:var(--clay-deep)}
+.contact-card .btn-primary{
+  width:100%;justify-content:center;
+  background:var(--clay-deep);
+  color:var(--cloud);
+  padding:1.1rem;
+  box-shadow: 0 8px 20px -6px rgba(169,105,77,.5);
+  border-radius: 40px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background .4s, color .4s, transform .4s, box-shadow .4s;
+}
+.contact-card .btn-primary:hover{
+  background:var(--clay);
+  color:var(--cloud);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -8px rgba(169,105,77,.6);
+}
 .contact-card .tel{display:block;text-align:center;margin-top:1.2rem;font-size:.9rem;color:var(--ink-soft);transition:color .3s}
 .contact-card .tel:hover{color:var(--clay-deep)}
 
 /* FOOTER */
-footer{background:var(--shell);padding:3rem var(--pad);text-align:center}
+footer{background:var(--shell);padding:3rem var(--pad);display:flex;flex-direction:column;align-items:center;text-align:center}
+.foot-brand-img{
+  width:64px;
+  height:64px;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid var(--shell-2);
+  margin-bottom:.8rem;
+}
 .foot-logo{font-family:var(--ff-display);font-style:italic;font-size:1.4rem;margin-bottom:.6rem;color:var(--ink)}
 footer small{display:block;color:var(--ink-soft);font-size:.8rem}
 footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
@@ -499,8 +535,10 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   .hero-portrait{justify-self:start;margin-top:2.6rem}
   .hero-portrait .frame{width:min(78vw,340px)}
   .about-grid{grid-template-columns:1fr}
-  .about-img{order:-1;max-width:480px}
   
+  .desktop-only{display:none;}
+  .mobile-only{display:block;margin:2rem 0;}
+
   /* Bento adjustments for tablets */
   .svc-bento{grid-template-columns:repeat(4,1fr);}
   .bento-card.wide{grid-column:span 2;}
@@ -542,6 +580,10 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
 <div id="loader" aria-hidden="true">
   <div class="load-stage">
     <img src="https://raw.githubusercontent.com/agelmet/STAMATAKI/refs/heads/main/logogoo.png" alt="Παρασκευή Σταματάκη Logo" class="loader-logo">
+    <div class="loader-text">
+      <span class="loader-name">Παρασκευή Σταματάκη</span>
+      <span class="loader-title">Ψυχολόγος · Ψυχοθεραπεύτρια (CBT)</span>
+    </div>
   </div>
 </div>
 
@@ -619,7 +661,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-grid wrap">
-    <div class="about-img reveal">
+    <div class="about-img reveal desktop-only">
       <img src="https://raw.githubusercontent.com/agelmet/STAMATAKI/refs/heads/main/her1.jpg" alt="Η Παρασκευή Σταματάκη στον χώρο της" loading="lazy">
       <div class="lic">Αρ. αδείας<br>14559 / 05-08-2010</div>
     </div>
@@ -628,6 +670,12 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
       <h2 style="font-family:var(--ff-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;margin-top:1rem;color:var(--ink)">Παρασκευή Σταματάκη</h2>
       <p>Ως Ψυχολόγος - Ψυχοθεραπεύτρια, με εξειδίκευση στη Γνωσιακή-Συμπεριφορική Θεραπεία (CBT) και μεταπτυχιακές σπουδές στη Νευροεπιστήμη («Εγκέφαλος και Νους»), προσεγγίζω τον άνθρωπο με επιστημονική αρτιότητα και βαθιά ενσυναίσθηση.</p>
       <p>Μέσα από την πολυετή κλινική μου εμπειρία σε ψυχιατρικά πλαίσια, διαγνωστικά κέντρα και δομές εκπαίδευσης, συνοδεύω ανθρώπους που έρχονται αντιμέτωποι με το άγχος, τις κρίσεις πανικού, τις φοβίες και τις προκλήσεις των διαπροσωπικών σχέσεων. Εστιάζουμε μαζί στην κατανόηση και την ουσιαστική διαχείριση αυτών των δυσκολιών.</p>
+      
+      <div class="about-img reveal mobile-only">
+        <img src="https://raw.githubusercontent.com/agelmet/STAMATAKI/refs/heads/main/her1.jpg" alt="Η Παρασκευή Σταματάκη στον χώρο της" loading="lazy">
+        <div class="lic">Αρ. αδείας<br>14559 / 05-08-2010</div>
+      </div>
+      
       <blockquote class="pullquote">«Στόχος μου είναι να δημιουργήσουμε μαζί ένα σταθερό έδαφος, προσφέροντας την εξατομικευμένη φροντίδα που χρειάζεστε για να ανακτήσετε την ψυχική σας ισορροπία.»</blockquote>
       <div class="cred-row">
         <div><b>15+</b><small>Έτη κλινικής εμπειρίας</small></div>
@@ -728,32 +776,26 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   </div>
   <div class="phil-grid wrap">
     <div class="phil-card reveal d1">
-      <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
       <h3>Ένας Ασφαλής Χώρος</h3>
       <p>Ένα περιβάλλον απόλυτης εχεμύθειας και αποδοχής, χωρίς καμία κριτική, όπου η ελεύθερη έκφραση ενθαρρύνεται.</p>
     </div>
     <div class="phil-card reveal d2">
-      <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-6 6c0 2 1 3 1 5h10c0-2 1-3 1-5a6 6 0 0 0-6-6Z"/><path d="M9 19h6M10 22h4"/></svg></div>
       <h3>Επιστημονική Αρτιότητα</h3>
       <p>Η CBT αποτελεί μια σύγχρονη, διεθνώς τεκμηριωμένη ψυχοθεραπευτική προσέγγιση με πρακτικά και μετρήσιμα αποτελέσματα.</p>
     </div>
     <div class="phil-card reveal d3">
-      <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></div>
       <h3>Βαθιά Ενσυναίσθηση</h3>
       <p>Σας ακούω με αληθινό ενδιαφέρον. Κάθε άνθρωπος είναι ξεχωριστός και η θεραπεία διαμορφώνεται απόλυτα στα δικά του μέτρα.</p>
     </div>
     <div class="phil-card reveal d1">
-      <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
       <h3>Στον Δικό σας Ρυθμό</h3>
       <p>Σεβόμαστε τον χρόνο σας. Προχωράμε με σταθερά βήματα, μόνο όταν νιώθετε την προσωπική ετοιμότητα να τα κάνετε.</p>
     </div>
     <div class="phil-card reveal d2">
-      <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
       <h3>Από τον Χώρο σας</h3>
       <p>Διαδικτυακές συνεδρίες που καταργούν τους γεωγραφικούς περιορισμούς, προσφέροντας απόλυτη ευελιξία και οικειότητα.</p>
     </div>
     <div class="phil-card reveal d3">
-      <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6a8 8 0 0 1 16 0v6"/><path d="M2 20h20M8 14a4 4 0 0 1 8 0"/></svg></div>
       <h3>Συνεχής Εξέλιξη</h3>
       <p>Η διαρκής ενημέρωσή μου στις σύγχρονες εξελίξεις της επιστήμης, διασφαλίζει την υψηλή ποιότητα της φροντίδας σας.</p>
     </div>
@@ -854,6 +896,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
 
 <!-- FOOTER -->
 <footer>
+  <img src="https://raw.githubusercontent.com/agelmet/STAMATAKI/refs/heads/main/logogoo.png" alt="Παρασκευή Σταματάκη Logo" class="foot-brand-img">
   <div class="foot-logo">Παρασκευή Σταματάκη</div>
   <small>Ψυχολόγος · Ψυχοθεραπεύτρια (CBT) — Αρ. αδείας 14559/05-08-2010 · Μέλος δικτύου DO+</small>
   <small class="credit">© <span id="yr"></span> Παρασκευή Σταματάκη. Με την επιφύλαξη παντός δικαιώματος.</small>
@@ -868,7 +911,7 @@ footer .credit{margin-top:1rem;opacity:.7;font-size:.72rem}
   window.addEventListener('load',function(){
     setTimeout(function(){
       document.getElementById('loader').classList.add('done');
-    }, reduce?100:1600);
+    }, reduce?100:1800);
   });
 
   /* nav scroll state */
